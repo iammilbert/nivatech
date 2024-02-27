@@ -1,18 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::view('navigation/about', 'navigation/about');
+Route::view('navigation/contact-us', 'navigation/contact-us');
+Route::view('navigation/gallery', 'navigation/gallery');
+Route::view('navigation/appointment', 'navigation/appointment');
+
+
+Route::as('nivatech.')->group(function () {
+    Route::Get('auth', [AuthController::class, 'index'])->name('auth');
+    Route::Get('signup', [AuthController::class, 'signup_page'])->name('signup.page');
+
 });
